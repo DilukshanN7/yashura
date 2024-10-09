@@ -2,24 +2,29 @@
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import gsap from "gsap";
 
 const Card = ({ title, content, icon }) => {
+  const cardRef = useRef(null);
+
   const variants = {
     hover: {
       scale: 1.1,
     },
   };
+
   return (
     <motion.div
+      ref={cardRef}
       whileHover="hover"
-      className="card bg-white/10 rounded-lg cursor-pointer flex justify-center items-center flex-col h-[350px] relative w-full max-w-[250px] mx-auto "
+      className="card bg-white/10 rounded-lg cursor-pointer flex justify-center items-center flex-col h-[350px] relative w-full max-w-[250px] mx-auto"
     >
       <motion.div className="translate-x-[0px] bg-[rgb(23,23,23)] rounded-lg flex flex-col flex-grow inset-[1px] p-[20px] absolute z-[2]">
         <motion.div
           variants={variants}
-          className="w-full flex mt-5 opacity-60 justify-center items-center h-full"
+          className="w-full flex mt-5 justify-center items-center h-full"
         >
-          <Image src={icon} height={150} width={150} />
+          <Image src={icon} height={150} width={150} alt={title} />
         </motion.div>
         <div className="w-full flex flex-col justify-end">
           <h2 className="text-white text-center text-2xl font-bold mb-2">
@@ -107,15 +112,35 @@ const CardContainer = ({ children }) => {
 };
 
 const MagicalBento = ({ cardData }) => {
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    gsap.from(cardsRef.current, {
+      duration: 0.8,
+      scale: 0.8,
+      opacity: 0,
+      stagger: 0.2,
+      ease: "power3.out",
+    });
+    gsap.to(cardsRef.current, {
+      scale: 1,
+      duration: 0.8,
+      stagger: 0.2,
+      opacity: 1,
+      ease: "power3.out",
+    });
+  }, []);
+
   return (
     <CardContainer>
       {cardData.map((card, index) => (
-        <Card
+        <div
+          className="opacity-0"
           key={index}
-          title={card.title}
-          content={card.content}
-          icon={card.icon}
-        />
+          ref={(el) => (cardsRef.current[index] = el)}
+        >
+          <Card title={card.title} content={card.content} icon={card.icon} />
+        </div>
       ))}
     </CardContainer>
   );
