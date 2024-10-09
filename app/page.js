@@ -7,36 +7,6 @@ import TiltCard from "./card";
 import { TransitionLink } from "./components/link-transition";
 
 export default function Home() {
-  const categories = [
-    {
-      title: "Body Kits",
-      href: "/body-kits",
-      image: "https://placehold.co/600x400/png",
-    },
-    {
-      title: "Wheels",
-      href: "/wheels",
-      image: "https://placehold.co/600x400/png",
-    },
-    {
-      title: "Showroom",
-      href: "/showroom",
-      image: "https://placehold.co/600x400/png",
-    },
-    {
-      title: "About Us",
-      href: "/about-us",
-      image: "https://placehold.co/600x400/png",
-    },
-  ];
 
-  return (
-    <motion.div className="flex flex-col lg:flex-row lg:justify-center pt-48 lg:pt-0 items-center h-screen gap-x-14 gap-y-14 lg:gap-y-0 overflow-y-hidden overflow-x-hidden">
-      {categories.map((category, index) => (
-        <TransitionLink key={index} href={category.href}>
-          <TiltCard image={category.image} title={category.title} />
-        </TransitionLink>
-      ))}
-    </motion.div>
   );
 }
