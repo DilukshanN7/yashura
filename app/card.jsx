@@ -62,13 +62,12 @@ const TiltCard = ({ image, title }) => {
         }}
         className="absolute inset-2 grid grid-rows-2 rounded-xl bg-white overflow-hidden shadow-lg"
       >
-                
-            <div className="relative">
-              <Image src={image} fill style={{ objectFit: 'cover' }}></Image>
-            </div>
-            <div className="flex bg-white text-3xl font-bold justify-center items-center h-48">
-              <h1>{title}</h1>
-            </div>
+        <div className="relative">
+          <Image src={image} fill style={{ objectFit: "cover" }}></Image>
+        </div>
+        <div className="flex bg-white text-3xl font-bold justify-center items-center h-48">
+          <h1>{title}</h1>
+        </div>
       </div>
     </motion.div>
   );

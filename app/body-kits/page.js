@@ -1,30 +1,103 @@
-'use client'
+"use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import TiltCard from "../card";
+import TiltCard2 from "./card";
+import MagicalBento from "./card";
 
 export default function BodyKits() {
-  const categories = [
-    { title: "Acura", href: "/body-kits", image: "https://placehold.co/600x400/png" },
-    { title: "Audi", href: "/wheels", image: "https://placehold.co/600x400/png" },
-    { title: "BMW", href: "/showroom", image: "https://placehold.co/600x400/png" },
-    { title: "Mercedes-Benz", href: "/about-us", image: "https://placehold.co/600x400/png" },
-  ]
-
   return (
-    <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ ease: "easeInOut", duration: 0.75 }} className="flex flex-col lg:flex-row lg:justify-center pt-48 lg:pt-0 items-center h-screen gap-x-14 gap-y-14 lg:gap-y-0">
-      {categories.map((category, index) => (
-        <Link key={index} href={category.href}>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="lg:grid lg:grid-rows-2 w-64 border-8 h-96 rounded-xl">
-            <div className="relative">
-              <Image src={category.image} fill style={{ objectFit: 'cover' }}></Image>
-            </div>
-            <div className="flex bg-white text-3xl font-bold justify-center items-center h-48">
-              <h1>{category.title}</h1>
-            </div>
-          </motion.div>
-        </Link>
-      ))}
+    <motion.div className="mt-48">
+      <MagicalBento
+        cardData={[
+          {
+            title: "Alfa Romeo",
+            href: "/alfa-romeo",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Aston Martin",
+            href: "/aston-martin",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Audi",
+            href: "/audi",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Bentley",
+            href: "/bentley",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "BMW",
+            href: "/bmw",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Bugatti",
+            href: "/bugatti",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Corvette",
+            href: "/corvette",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Ferrari",
+            href: "/ferrari",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Lamborghini",
+            href: "/lamborghini",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Land Rover",
+            href: "/land-rover",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Maserati",
+            href: "/maserati",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Mercedes",
+            href: "/mercedes",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Porsche",
+            href: "/porsche",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Rolls Royce",
+            href: "/rolls-royce",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Ford",
+            href: "/ford",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Nissan",
+            href: "/nissan",
+            icon: "https://placehold.co/600x400/png",
+          },
+          {
+            title: "Toyota",
+            href: "/toyota",
+            icon: "https://placehold.co/600x400/png",
+          },
+        ]}
+      />
     </motion.div>
   );
 }
