@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { AnimatePresence } from "framer-motion";
+import TiltCard from "./card";
 
 export default function Home() {
   const categories = [
@@ -12,19 +14,14 @@ export default function Home() {
   ]
 
   return (
-    <div className="flex flex-col lg:flex-row lg:justify-center pt-48 lg:pt-0 items-center h-screen gap-x-14 gap-y-14 lg:gap-y-0">
+    <motion.div className="flex flex-col lg:flex-row lg:justify-center pt-48 lg:pt-0 items-center h-screen gap-x-14 gap-y-14 lg:gap-y-0 overflow-y-hidden overflow-x-hidden">
+      <AnimatePresence>
       {categories.map((category, index) => (
         <Link key={index} href={category.href}>
-          <motion.div whileHover={{ scale: 1.1 }} className="lg:grid lg:grid-rows-2 w-64 border-8 h-96 rounded-xl">
-            <div className="relative">
-              <Image src={category.image} layout="fill"></Image>
-            </div>
-            <div className="flex text-3xl font-bold justify-center items-center h-48">
-              <h1>{category.title}</h1>
-            </div>
-          </motion.div>
+          <TiltCard image={category.image} title={category.title}/>
         </Link>
       ))}
-    </div>
+      </AnimatePresence>
+    </motion.div>
   );
 }
