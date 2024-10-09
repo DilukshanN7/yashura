@@ -19,7 +19,7 @@ const Card = ({ title, content, icon }) => {
           variants={variants}
           className="w-full flex mt-5 opacity-60 justify-center items-center h-full"
         >
-          <Image className="invert" src={icon} height={80} width={80} />
+          <Image src={icon} height={150} width={150} />
         </motion.div>
         <div className="w-full flex flex-col justify-end">
           <h2 className="text-white text-center text-2xl font-bold mb-2">
