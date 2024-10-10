@@ -2,34 +2,36 @@
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
 
 const Card = ({ title, content, icon }) => {
-  const cardRef = useRef(null);
-
   const variants = {
     hover: {
       scale: 1.1,
     },
   };
-
   return (
     <motion.div
-      ref={cardRef}
       whileHover="hover"
-      className="card bg-white/10 rounded-lg cursor-pointer flex justify-center items-center flex-col h-[350px] relative w-full max-w-[250px] mx-auto"
+      className="card bg-white/10 rounded-lg cursor-pointer flex justify-center items-center flex-col h-[450px] relative w-full max-w-[300px] mx-auto"
     >
-      <motion.div className="bg-[rgb(23,23,23)] rounded-lg flex flex-col flex-grow inset-[1px] p-[20px] absolute z-[2]">
+      <motion.div className="card-content translate-x-[0.5px] bg-[rgb(23,23,23)] rounded-lg flex flex-col flex-grow inset-[1px] p-[20px] absolute z-[2]">
         <motion.div
           variants={variants}
-          className="w-full flex mt-5 justify-center items-center h-full"
+          className="w-full flex mt-5 opacity-60 justify-center items-center h-full"
         >
-          <Image src={icon} height={150} width={150} alt={title} />
+          <Image
+            className="invert"
+            src={icon}
+            height={80}
+            width={80}
+            alt={title}
+          />
         </motion.div>
-        <div className="w-full flex flex-col justify-center">
-          <h2 className="text-white text-center text-2xl font-bold mb-6">
-            {title}
-          </h2>
+        <div className="h-full flex flex-col justify-center">
+          <h2 className="text-white text-4xl text-center font-bold">{title}</h2>
           <p className="text-gray-300">{content}</p>
         </div>
       </motion.div>
@@ -63,11 +65,11 @@ const CardContainer = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center bg-black overflow-hidden p-5">
+    <div className="flex items-center h-screen justify-center bg-black overflow-hidden p-5">
       <div
         ref={containerRef}
         id="cards"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-[1250px] w-full"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 max-w-[1250px] w-full"
       >
         {children}
       </div>
@@ -112,34 +114,34 @@ const CardContainer = ({ children }) => {
 };
 
 const MagicalBento = ({ cardData }) => {
+  const router = useRouter();
   const cardsRef = useRef([]);
 
-  useEffect(() => {
-    gsap.from(cardsRef.current, {
-      duration: 0.8,
-      scale: 0.8,
-      opacity: 0,
-      stagger: 0.2,
-      ease: "power3.out",
-    });
+  const handleNavigation = (href, e) => {
+    e.preventDefault();
+
     gsap.to(cardsRef.current, {
-      scale: 1,
-      duration: 0.8,
-      stagger: 0.2,
-      opacity: 1,
-      ease: "power3.out",
+      opacity: 0,
+      scale: 0.8,
+      stagger: 0.1,
+      duration: 0.5,
+      ease: "power2.in",
+      onComplete: () => {
+        router.push(href);
+      },
     });
-  }, []);
+  };
 
   return (
     <CardContainer>
       {cardData.map((card, index) => (
-        <div
-          className="opacity-0"
-          key={index}
-          ref={(el) => (cardsRef.current[index] = el)}
-        >
-          <Card title={card.title} content={card.content} icon={card.icon} />
+        <div key={index} ref={(el) => (cardsRef.current[index] = el)}>
+          <Link
+            href={card.href}
+            onClick={(e) => handleNavigation(card.href, e)}
+          >
+            <Card title={card.title} content={card.content} icon={card.image} />
+          </Link>
         </div>
       ))}
     </CardContainer>

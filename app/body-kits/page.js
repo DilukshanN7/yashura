@@ -1,9 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
-import TiltCard from "../card";
-import TiltCard2 from "./card";
 import MagicalBento from "./card";
 
 export default function BodyKits() {
