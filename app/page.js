@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <motion.div
       ref={containerRef}
-      className="flex flex-col lg:flex-row lg:justify-center pt-48 lg:pt-0 items-center h-screen gap-x-14 gap-y-14 lg:gap-y-0 overflow-y-hidden overflow-x-hidden"
+      className="flex flex-col lg:flex-row lg:justify-center pt-48 lg:pt-0 items-center h-screen gap-x-14 gap-y-14 lg:gap-y-0"
     >
       {categories.map((category, index) => (
         <Link
@@ -69,7 +69,7 @@ export default function Home() {
           <motion.div
             ref={(el) => (cardsRef.current[index] = el)}
             whileHover={{ scale: 1.05 }}
-            className="lg:grid lg:grid-rows-2 w-64 border-8 border-slate-900 h-96 rounded-xl"
+            className="grid grid-rows-2 w-64 border-8 border-slate-900 h-96 rounded-xl"
           >
             <div className="relative">
               <Image
