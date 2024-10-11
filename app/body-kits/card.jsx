@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
+import Link from "next/link";
 
 const Card = ({ title, content, icon }) => {
   const cardRef = useRef(null);
@@ -134,13 +135,15 @@ const MagicalBento = ({ cardData }) => {
   return (
     <CardContainer>
       {cardData.map((card, index) => (
-        <div
-          className="opacity-0"
-          key={index}
-          ref={(el) => (cardsRef.current[index] = el)}
-        >
-          <Card title={card.title} content={card.content} icon={card.icon} />
-        </div>
+        <Link href={card.href} key={index}>
+          <div
+            className="opacity-0"
+            key={index}
+            ref={(el) => (cardsRef.current[index] = el)}
+          >
+            <Card title={card.title} content={card.content} icon={card.icon} />
+          </div>
+        </Link>
       ))}
     </CardContainer>
   );
