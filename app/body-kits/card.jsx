@@ -121,13 +121,13 @@ const MagicalBento = ({ cardData }) => {
       duration: 0.8,
       scale: 0.8,
       opacity: 0,
-      stagger: 0.2,
+      stagger: 0.1,
       ease: "power3.out",
     });
     gsap.to(cardsRef.current, {
       scale: 1,
       duration: 0.8,
-      stagger: 0.2,
+      stagger: 0.1,
       opacity: 1,
       ease: "power3.out",
     });
