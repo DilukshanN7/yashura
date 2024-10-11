@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Card = ({ title, content, icon }) => {
   const cardRef = useRef(null);
@@ -132,10 +133,31 @@ const MagicalBento = ({ cardData }) => {
     });
   }, []);
 
+  const router = useRouter();
+
+  const handleNavigation = (href, e) => {
+    e.preventDefault();
+
+    gsap.to(cardsRef.current, {
+      opacity: 0,
+      scale: 0.8,
+      stagger: 0.1,
+      duration: 0.5,
+      ease: "power2.in",
+      onComplete: () => {
+        router.push(href);
+      },
+    });
+  };
+
   return (
     <CardContainer>
       {cardData.map((card, index) => (
-        <Link href={card.href} key={index}>
+        <Link
+          href={card.href}
+          key={index}
+          onClick={(e) => handleNavigation(card.href, e)}
+        >
           <div
             className="opacity-0"
             key={index}
